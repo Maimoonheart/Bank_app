@@ -62,15 +62,16 @@ class Banking_app():
             if matches:
                 print(Fore.GREEN + f"You've successfully create an account with us.\nHere is your account number:{self.account}")
                 print(Style.RESET_ALL)
+                query="INSERT INTO customer(fullname,email,password,accountNumber,date,accountBalance) VALUE(%s,%s,%s,%s,%s,%s)"
+                value = (fullname,email,password,self.account,date,accountbal)
+                mycursor.execute(query,value)
+                mycon.commit()
                 self.login()
             else:
                 print(Fore.RED + "Invalid email")
                 print(Style.RESET_ALL)
                 self.home()
-            query="INSERT INTO customer(fullname,email,password,accountNumber,date,accountBalance) VALUE(%s,%s,%s,%s,%s,%s)"
-            value = (fullname,email,password,self.account,date,accountbal)
-            mycursor.execute(query,value)
-            mycon.commit()
+           
         #     print(mycursor.rowcount,"row added")
              
 
